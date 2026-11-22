@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ember Court — a duel of cards</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div id="app">
+  <header id="topbar">
+    <div class="brand">▲ EMBER COURT</div>
+    <div id="turn-label">Your turn</div>
+    <div class="top-actions">
+      <button id="mute-btn" type="button">🔊 Sound</button>
+      <button id="restart-btn" type="button">↻ New game</button>
+    </div>
+  </header>
+
+  <!-- The Warden: portrait, life, mana, deck, and a face-down hand -->
+  <section id="foe-row" class="side-row">
+    <div class="portrait foe-portrait" title="Cinder Warden, keeper of the court">
+      <span class="portrait-glyph">♛</span>
+      <span class="portrait-name">Cinder Warden</span>
+    </div>
+    <div class="side-stats">
+      <div class="stat-line"><span class="stat-label">Life</span><span id="foe-life" class="life"></span></div>
+      <div class="stat-line"><span class="stat-label">Mana</span><span id="foe-mana" class="mana"></span></div>
+      <div class="stat-line"><span id="foe-deck" class="deck-count">Deck 20</span></div>
+    </div>
+    <div id="foe-hand" class="hand foe-hand" aria-label="The Warden's hand, face down"></div>
+  </section>
+
+  <!-- The table: last cards played, resonance, and the running log -->
+  <section id="table">
+    <div id="played-foe" class="played-slot"></div>
+    <div id="table-middle">
+      <div id="resonance" class="resonance"></div>
+      <div id="log" class="log" aria-live="polite"></div>
+    </div>
+    <div id="played-you" class="played-slot"></div>
+  </section>
+
+  <!-- You: life, mana, deck, face-up hand, end turn -->
+  <section id="you-row" class="side-row">
+    <div class="portrait you-portrait" title="You, challenger of the court">
+      <span class="portrait-glyph">♞</span>
+      <span class="portrait-name">You</span>
+    </div>
+    <div class="side-stats">
+      <div class="stat-line"><span class="stat-label">Life</span><span id="you-life" class="life"></span></div>
+      <div class="stat-line"><span class="stat-label">Mana</span><span id="you-mana" class="mana"></span></div>
+      <div class="stat-line"><span id="you-deck" class="deck-count">Deck 20</span></div>
+    </div>
+    <div class="you-hand-wrap">
+      <div id="you-hand" class="hand you-hand" aria-label="Your hand"></div>
+      <div class="hand-footer">
+        <span id="hand-count"></span>
+        <button id="end-turn" type="button">End turn ⏎</button>
+      </div>
+    </div>
+  </section>
+
+  <footer id="helpbar">Click a card to play it · keys 1–7 play · Enter ends the turn · M mutes · two cards of one suit in a turn resonate for +2 power</footer>
+</div>
+
+<!-- Title screen -->
+<div id="title-overlay" class="overlay">
+  <div class="overlay-card title-card">
+    <div class="title-glyph">▲</div>
+    <h1>EMBER COURT</h1>
+    <p class="tagline">A duel of cards beneath the Cinder Warden's gaze.</p>
+    <p class="howto">You and the Warden hold <b>16 life</b> each. Play cards with <b>mana</b> —
+      strikes to wound, siphons to drink life back, guards to raise shield, mends to heal,
+      rallies to draw. Play <b>two cards of one suit</b> in a turn and the second
+      <b>resonates for +2 power</b>. First ember out wins the court.</p>
+    <button id="start-btn" type="button">Take your seat ▶</button>
+    <p class="keys-hint">Mouse or keyboard · 1–7 play a card · Enter ends the turn</p>
+  </div>
+</div>
+
+<!-- Win / loss screen -->
+<div id="end-overlay" class="overlay hidden">
+  <div class="overlay-card end-card">
+    <h1 id="end-title">Victory!</h1>
+    <p id="end-sub" class="tagline"></p>
+    <div id="end-stats" class="end-stats"></div>
+    <button id="end-again" type="button">Play again ↻</button>
+  </div>
+</div>
+
+<script type="module" src="src/main.js"></script>
+</body>
+</html>
